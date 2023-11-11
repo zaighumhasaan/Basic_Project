@@ -1,0 +1,54 @@
+﻿@model Basic_Project.Models.Purchase
+
+@{
+    ViewData["Title"] = "Detail_Purchase";
+}
+
+<h1>Detail_Purchase</h1>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PurchaseProduct)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PurchaseProduct)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PurchaseQnty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PurchaseQnty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductMdfDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductMdfDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductExpDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductExpDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning btn-sm" asp-action="Update_Purchase" asp-route-id="@Model.Id">Edit</a> |
+    <a class="btn btn-success btn-sm" asp-action="Display_Purchase">Back to List</a>
+</div>

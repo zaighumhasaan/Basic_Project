@@ -1,0 +1,158 @@
+﻿
+<div class="container mr-3 cardss">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-header bg-gradient-green text-white">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <i class="fa fa-tablets fa-capsules  fa-4x"></i>
+                        </div>
+                        <div class="col">
+
+                            <h4>Fresh Stock</h4>
+                            <h2 id="newstock"></h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <h5>
+                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                    </h5>
+                </div>
+            </div>
+
+        </div>
+        @*Card Ends Here*@
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-header bg-info text-white">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <i class="fa fa-boxes fa-4x"></i>
+                        </div>
+                        <div class="col">
+
+                            <h4>Near To Empty</h4>
+                            <h2 id="minstock"></h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <h5>
+                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                    </h5>
+                </div>
+            </div>
+
+        </div>
+        @*Card Ends Here*@
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-header bg-gradient-danger text-white">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <i class="fa fa-capsules fa-4x"></i>
+                        </div>
+                        <div class="col">
+                            <h4>Near To Expired</h4>
+                            <h2 id="NearToExp"></h2>
+                            
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <h5>
+                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                    </h5>
+                </div>
+            </div>
+
+        </div>
+        @*Card Ends Here*@
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-header bg-danger text-white">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <i class="fa fa-capsules fa-4x"></i>
+                        </div>
+                        <div class="col">
+
+                            <h4>Expired Drugs</h4>
+                            <h2 class="bg-black" id="expdrug"></h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <h5>
+                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                    </h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+     $.ajax({
+         url: "/Products/Fresh_Stock",
+         method: "GET",
+         success: function (Data) {
+
+             $("#newstock").html(Data);
+         },
+         error: function (response) {
+
+         }
+     });
+ });
+ $(document).ready(function () {
+     $.ajax({
+         url: "/Products/Get_Min_Stock",
+         method: "GET",
+         success: function (Data) {
+
+             $("#minstock").html(Data);
+         },
+         error: function (response) {
+
+         }
+     });
+ }); 
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "/Products/Near_To_Expire",
+                method: "GET",
+                success: function (Data) {
+
+                    $("#NearToExp").html(Data);
+                },
+                error: function (response) {
+
+                }
+            });
+        });
+               $(document).ready(function () {
+            $.ajax({
+                url: "/Products/Expired",
+                method: "GET",
+                success: function (Data) {
+
+                    $("#expdrug").html(Data);
+                },
+                error: function (response) {
+
+                }
+            });
+        });
+    </script>
+}

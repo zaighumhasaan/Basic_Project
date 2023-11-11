@@ -1,0 +1,36 @@
+﻿@model Basic_Project.Models.Product
+
+@{
+    ViewData["Title"] = "Detail_Product";
+}
+
+<center><h1 class="fa ">Product Detail  </h1></center>
+<table class="table tab-content table-hover table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Manufactured Date</th>
+            <th scope="col">Expiry Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>@Html.DisplayFor(model => model.ProductName)</td>
+            <td>@Html.DisplayFor(model => model.Price)</td>
+            <td>@Html.DisplayFor(model => model.ProductQnty)</td>
+
+            <td>@Html.DisplayFor(model => model.MfgDate)</td>
+            <td>@Html.DisplayFor(model => model.ExpDate)</td>
+        </tr>
+
+    </tbody>
+
+</table>
+<center >
+    <a asp-action="Delete_Product" class="font-weight-bolder btn-outline-danger btn-sm"> Delete</a> |
+    <a asp-action="Update_Product" class="font-weight-bolder  btn-outline-success btn-sm"> Update</a>
+</center>

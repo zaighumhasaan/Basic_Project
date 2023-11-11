@@ -1,0 +1,67 @@
+﻿@model Basic_Project.Models.Purchase
+
+@{
+    ViewData["Title"] = "Add_Purchase";
+}
+
+<center>
+    <h1 class="fa">Add Purchase</h1>
+</center>
+
+@if (ViewBag.SMESSAGE != null)
+{
+    <div class="alert-success">@ViewBag.SMESSAGE</div>
+}
+@if (ViewBag.EMESSAGE != null)
+{
+    <div class="alert-danger">@ViewBag.SMESSAGE</div>
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add_Purchase">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PurchaseProduct" class="control-label">Purchase Product Name</label>
+                <input asp-for="PurchaseProduct" class="form-control" />
+                <span asp-validation-for="PurchaseProduct" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseDate" class="control-label">Purchase Date</label>
+                <input asp-for="PurchaseDate" class="form-control" />
+                <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseQnty" class="control-label">Quantity</label>
+                <input asp-for="PurchaseQnty" class="form-control" />
+                <span asp-validation-for="PurchaseQnty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductMdfDate" class="control-label">Product Manufactured Date</label>
+                <input asp-for="ProductMdfDate" class="form-control" />
+                <span asp-validation-for="ProductMdfDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductExpDate" class="control-label">Product Expiry Date</label>
+                <input asp-for="ProductExpDate" class="form-control" />
+                <span asp-validation-for="ProductExpDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Display_Purchase" class="buttons btn-success btn-sm">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

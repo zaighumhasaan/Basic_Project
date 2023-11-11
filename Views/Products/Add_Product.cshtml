@@ -1,0 +1,63 @@
+﻿@model Basic_Project.Models.Product
+
+@{
+    ViewData["Title"] = "Add_Product";
+}
+
+<center><h1 class="fa">Add Product</h1></center>
+<hr />
+
+@if (ViewBag.SMESSAGE != null)
+{
+    <div class="alert-success">@ViewBag.SMESSAGE</div>
+}
+@if (ViewBag.EMESSAGE != null)
+{
+    <div class="alert-danger">@ViewBag.SMESSAGE</div>
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add_Product">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductQnty" class="control-label"></label>
+                <input asp-for="ProductQnty" class="form-control" />
+                <span asp-validation-for="ProductQnty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MfgDate" class="control-label"></label>
+                <input asp-for="MfgDate" class="form-control" />
+                <span asp-validation-for="MfgDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpDate" class="control-label"></label>
+                <input asp-for="ExpDate" class="form-control" />
+                <span asp-validation-for="ExpDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+
+    <center>    <a asp-action="Display_Products" class="bg-gray-light fa btn-outline-info">Show All Products</a></center>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
