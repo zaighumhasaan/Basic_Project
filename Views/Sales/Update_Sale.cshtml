@@ -1,17 +1,19 @@
 ﻿@model Basic_Project.Models.Sale
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update_Sale";
 }
 
-<h1>Create</h1>
+<center><h1>Update Sale</h1></center>
 
-<h4>Sale</h4>
+
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Update_Sale">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="SaleProduct" class="control-label"></label>
                 <input asp-for="SaleProduct" class="form-control" />
@@ -33,14 +35,14 @@
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-success btn-sm" asp-action="Dicplay_Sale">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,13 +1,13 @@
 ﻿@model Basic_Project.Models.Sale
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detail_Sale";
 }
 
-<h1>Details</h1>
+<center><h1>Sale Deyail</h1></center>
 
 <div>
-    <h4>Sale</h4>
+
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-warning btn-sm" asp-action="Update_Sale" asp-route-id="@Model.Id">Update</a> |
+    <a class="btn btn-success btn-sm" asp-action="Display_Sale">Back to List</a>
 </div>

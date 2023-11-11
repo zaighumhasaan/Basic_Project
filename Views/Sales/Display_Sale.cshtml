@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Basic_Project.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Display_Sale";
+}
+
+<center><h1>All Sales Record</h1></center>
+
+@if (ViewBag.SMESSAGE != null)
+{
+    <div class="alert-success">@ViewBag.SMESSAGE</div>
+}
+@if (ViewBag.EMESSAGE != null)
+{
+    <div class="alert-danger">@ViewBag.SMESSAGE</div>
+}
+
+<p>
+    <a class="btn btn-success btn-sm" asp-action="Add_Sale">Add New Sale</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseQnty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductMdfDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductExpDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseQnty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductMdfDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductExpDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a class="btn btn-success btn-sm" asp-action="Update_Sale" asp-route-id="@item.Id">Update</a> |
+                    <a class="btn btn-warning btn-sm" asp-action="Details" asp-route-id="@item.Id">Detail</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

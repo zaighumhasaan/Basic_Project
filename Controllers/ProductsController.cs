@@ -17,6 +17,7 @@ namespace Basic_Project.Controllers
         {
             _dbcontext = context;
         }
+      
         [HttpGet]
         public IActionResult Add_Product()
         {

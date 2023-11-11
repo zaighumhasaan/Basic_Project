@@ -11,153 +11,138 @@ namespace Basic_Project.Controllers
 {
     public class SalesController : Controller
     {
-        private readonly InventoryManagementContext _context;
+        private readonly InventoryManagementContext _dbcontext;
 
         public SalesController(InventoryManagementContext context)
         {
-            _context = context;
+            _dbcontext = context;
         }
 
-        // GET: Sales
-        public async Task<IActionResult> Index()
-        {
-              return _context.Sales != null ? 
-                          View(await _context.Sales.ToListAsync()) :
-                          Problem("Entity set 'InventoryManagementContext.Sales'  is null.");
-       
-        }
-
-        // GET: Sales/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Sales == null)
-            {
-                return NotFound();
-            }
-
-            var sale = await _context.Sales
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (sale == null)
-            {
-                return NotFound();
-            }
-
-            return View(sale);
-        }
-
-        // GET: Sales/Create
-        public IActionResult Create()
+        [HttpGet]
+        public IActionResult Add_Sale()
         {
             return View();
         }
-
-        // POST: Sales/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SaleProduct,SaleDate,SaleQnty,Total")] Sale sale)
+        public IActionResult Add_Sale(Sale obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(sale);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (obj != null)
+                {
+                    _dbcontext.Sales.Add(obj);
+                    _dbcontext.SaveChanges();
+                    ViewBag.SMESSAGE = "Sale Added Successfully";
+                }
+                else
+                {
+                    ViewBag.EMESSAGE = "Some Error Occured Please Try Again....!";
+                }
+
+                return View();
+
             }
-            return View(sale);
+            catch (Exception ex)
+            {
+                ViewBag.EMESSAGE = "Some Error Occured...!";
+                return View();
+            }
+
         }
 
-        // GET: Sales/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Sales == null)
-            {
-                return NotFound();
-            }
+        [HttpGet]
 
-            var sale = await _context.Sales.FindAsync(id);
-            if (sale == null)
-            {
-                return NotFound();
-            }
-            return View(sale);
+        public IActionResult Detail_Sale(int id)
+        {
+
+
+            return View(_dbcontext.Sales.Find(id));
         }
 
-        // POST: Sales/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpGet]
+
+        public IActionResult Delete_Sale(int id)
+        {
+            try
+            {
+                Sale obj = _dbcontext.Sales.Find(id);
+
+                if (obj != null)
+                {
+                    _dbcontext.Sales.Remove(obj);
+                    _dbcontext.SaveChanges();
+                    TempData["SMessage"] = "Data Updated Successfully";
+
+
+                }
+                else
+                {
+                    TempData["EMessage"] = "Data Not Found...!";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["EMessage"] = "Data Not Found...!";
+
+            }
+            return RedirectToAction("Display_Sale");
+        }
+
+
+        [HttpGet]
+
+        public IActionResult Update_Sale(int id)
+        {
+            ViewBag.SMessage = TempData["SMessage"];
+            ViewBag.EMessage = TempData["EMessage"];
+
+            return View(_dbcontext.Sales.Find(id));
+        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SaleProduct,SaleDate,SaleQnty,Total")] Sale sale)
-        {
-            if (id != sale.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+        public IActionResult Update_Sale(Sale obj)
+        {
+
+            try
             {
-                try
+                if (obj != null)
                 {
-                    _context.Update(sale);
-                    await _context.SaveChangesAsync();
+                    _dbcontext.Sales.Update(obj);
+                    _dbcontext.SaveChanges();
+                    TempData["SMessage"] = "Sale Updated Successfully.";
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!SaleExists(sale.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+
+                    TempData["SMessage"] = "Sale Not Found.";
                 }
-                return RedirectToAction(nameof(Index));
+
+
             }
-            return View(sale);
+            catch (Exception ex)
+            {
+                TempData["EMessage"] = "Some Error Occured Please Try Again...!";
+            }
+
+
+            return RedirectToAction("Display_Sale");
         }
 
-        // GET: Sales/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpGet]
+
+        public IActionResult Display_Sale()
         {
-            if (id == null || _context.Sales == null)
-            {
-                return NotFound();
-            }
-
-            var sale = await _context.Sales
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (sale == null)
-            {
-                return NotFound();
-            }
-
-            return View(sale);
+            //var lCategories = _dbcontext.ItemCategories.ToList();
+            ViewBag.SMESSAGE = TempData["SMessage"];
+            ViewBag.EMESSAGE = TempData["EMessage"];
+            var LCategories = _dbcontext.Sales.ToList();
+            return View(LCategories);
         }
 
-        // POST: Sales/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Sales == null)
-            {
-                return Problem("Entity set 'InventoryManagementContext.Sales'  is null.");
-            }
-            var sale = await _context.Sales.FindAsync(id);
-            if (sale != null)
-            {
-                _context.Sales.Remove(sale);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+    
 
-        private bool SaleExists(int id)
-        {
-          return (_context.Sales?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
+
     }
 }
