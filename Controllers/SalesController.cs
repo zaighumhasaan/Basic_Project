@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Basic_Project.Models;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Basic_Project.Controllers
 {
@@ -13,14 +16,17 @@ namespace Basic_Project.Controllers
     {
         private readonly InventoryManagementContext _dbcontext;
 
+        
         public SalesController(InventoryManagementContext context)
         {
             _dbcontext = context;
         }
-
         [HttpGet]
         public IActionResult Add_Sale()
         {
+            ViewBag.SMeesage = TempData["SMessage"];
+            ViewBag.EMessage = TempData["EMessage"];
+            ViewBag.ListItems = _dbcontext.Products.ToList();
             return View();
         }
         [HttpPost]
@@ -28,23 +34,36 @@ namespace Basic_Project.Controllers
         {
             try
             {
-                if (obj != null)
+                int Bis_Id = 29;
+                int P_Id = 31;
+
+                Product Bis = _dbcontext.Products.Find(29);
+                Product Para = _dbcontext.Products.Find(31);
+
+                if(obj.SaleProduct==Bis.ProductName)
                 {
+                    Bis = Bis.ProductQnty - obj.SaleQnty;
+                    _dbcontext.Products.Update(Bis);
+                   
                     _dbcontext.Sales.Add(obj);
                     _dbcontext.SaveChanges();
-                    ViewBag.SMESSAGE = "Sale Added Successfully";
-                }
-                else
-                {
-                    ViewBag.EMESSAGE = "Some Error Occured Please Try Again....!";
-                }
 
+                }
+                else if(obj.SaleProduct==Para.ProductName)
+                {
+                    Para = Para.ProductQnty - obj.SaleQnty;
+                    _dbcontext.Products.Update(Bis);
+                    
+                    _dbcontext.Sales.Add(obj);
+                    _dbcontext.SaveChanges();
+                }
+               
                 return View();
 
             }
             catch (Exception ex)
             {
-                ViewBag.EMESSAGE = "Some Error Occured...!";
+                ViewBag.EMESSAGE = "Some Error Occured Please Try Agin Later....!";
                 return View();
             }
 
@@ -133,16 +152,18 @@ namespace Basic_Project.Controllers
 
         public IActionResult Display_Sale()
         {
-            //var lCategories = _dbcontext.ItemCategories.ToList();
             ViewBag.SMESSAGE = TempData["SMessage"];
             ViewBag.EMESSAGE = TempData["EMessage"];
             var LCategories = _dbcontext.Sales.ToList();
             return View(LCategories);
         }
 
+
+    }
+
     
 
 
 
-    }
 }
+

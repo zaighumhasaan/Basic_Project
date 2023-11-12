@@ -7,7 +7,7 @@ public partial class Sale
 {
     public int Id { get; set; }
 
-    public string SaleProduct { get; set; } = null!;
+    public string? SaleProduct { get; set; } = null!;
 
     public DateTime SaleDate { get; set; }
 

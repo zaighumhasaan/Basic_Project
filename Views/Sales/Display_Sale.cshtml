@@ -1,43 +1,28 @@
-﻿@model IEnumerable<Basic_Project.Models.Purchase>
+﻿@model IEnumerable<Basic_Project.Models.Sale>
 
 @{
     ViewData["Title"] = "Display_Sale";
 }
 
-<center><h1>All Sales Record</h1></center>
-
-@if (ViewBag.SMESSAGE != null)
-{
-    <div class="alert-success">@ViewBag.SMESSAGE</div>
-}
-@if (ViewBag.EMESSAGE != null)
-{
-    <div class="alert-danger">@ViewBag.SMESSAGE</div>
-}
+<center><h1>Sale</h1></center>
 
 <p>
-    <a class="btn btn-success btn-sm" asp-action="Add_Sale">Add New Sale</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="DataTableData">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PurchaseProduct)
+                Product
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PurchaseDate)
+                Sold Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PurchaseQnty)
+                Product Quantity
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductMdfDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductExpDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Total Amount
             </th>
             <th></th>
         </tr>
@@ -47,29 +32,34 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PurchaseProduct)
+                    @Html.DisplayFor(modelItem => item.SaleProduct)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                    @Html.DisplayFor(modelItem => item.SaleDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PurchaseQnty)
+                    @Html.DisplayFor(modelItem => item.SaleQnty)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductMdfDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductExpDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    @Html.DisplayFor(modelItem => item.Total)
                 </td>
                 <td>
                     <a class="btn btn-success btn-sm" asp-action="Update_Sale" asp-route-id="@item.Id">Update</a> |
-                    <a class="btn btn-warning btn-sm" asp-action="Details" asp-route-id="@item.Id">Detail</a> |
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-warning btn-sm" asp-action="Detail_Sale" asp-route-id="@item.Id">Detail</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="Delete_Sale" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+@section scripts{
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/DataTable/jquery.dataTables.js"></script>
+    <script src="~/DataTable/jquery.dataTables.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Datatable.js"></script>
+}

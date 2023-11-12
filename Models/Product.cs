@@ -16,4 +16,9 @@ public partial class Product
     public DateTime? MfgDate { get; set; }
 
     public DateTime? ExpDate { get; set; }
+
+    public static implicit operator Product?(int? v)
+    {
+        throw new NotImplementedException();
+    }
 }

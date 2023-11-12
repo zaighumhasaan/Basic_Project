@@ -1,0 +1,57 @@
+﻿@model Basic_Project.Models.Sale
+
+@{
+    ViewData["Title"] = "Add_Sale";
+}
+
+<center><h1 class="fa">Manage Sale</h1></center>
+<hr />
+
+@if (ViewBag.SMESSAGE != null)
+{
+    <div class="alert-success">@ViewBag.SMESSAGE</div>
+}
+@if (ViewBag.EMESSAGE != null)
+{
+    <div class="alert-danger">@ViewBag.SMESSAGE</div>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add_Sale">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SaleProduct" class="control-label"></label>
+                <input asp-for="SaleProduct" class="form-control" />
+                <span asp-validation-for="SaleProduct" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaleDate" class="control-label"></label>
+
+                <input class="form-control" asp-for="SaleDate" type="datetime" value="@DateTime.Now.ToShortDateString()" id="saledate" />
+                <span asp-validation-for="SaleDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaleQnty" class="control-label"></label>
+                <input asp-for="SaleQnty" class="form-control" />
+                <span asp-validation-for="SaleQnty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Display_Sale">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
