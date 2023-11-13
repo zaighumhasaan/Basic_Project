@@ -1,29 +1,7 @@
 ﻿
 <div class="container mr-3 cardss">
     <div class="row">
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-header bg-gradient-green text-white">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <i class="fa fa-tablets fa-capsules  fa-4x"></i>
-                        </div>
-                        <div class="col">
-
-                            <h4>Fresh Stock</h4>
-                            <h2 id="newstock"></h2>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <h5>
-                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
-                    </h5>
-                </div>
-            </div>
-
-        </div>
+        
         @*Card Ends Here*@
         <div class="col-md-3">
             <div class="card text-center">
@@ -42,7 +20,7 @@
                 </div>
                 <div class="card-footer">
                     <h5>
-                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                        <a asp-action="Low_stock" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
                     </h5>
                 </div>
             </div>
@@ -57,7 +35,7 @@
                             <i class="fa fa-capsules fa-4x"></i>
                         </div>
                         <div class="col">
-                            <h4>Near To Expired</h4>
+                            <h4>Near To Expir</h4>
                             <h2 id="NearToExp"></h2>
                             
                         </div>
@@ -66,7 +44,7 @@
                 </div>
                 <div class="card-footer">
                     <h5>
-                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                        <a asp-action="About_To_Expire" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
                     </h5>
                 </div>
             </div>
@@ -83,14 +61,14 @@
                         <div class="col">
 
                             <h4>Expired Drugs</h4>
-                            <h2 class="bg-black" id="expdrug"></h2>
+                            <h2  id="expdrug"></h2>
                         </div>
 
                     </div>
                 </div>
                 <div class="card-footer">
                     <h5>
-                        <a href="#" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                        <a asp-action="Expired_Products" class="text-primary">View Details<i class="fa fa-arrow-circle-right"></i></a>
                     </h5>
                 </div>
             </div>

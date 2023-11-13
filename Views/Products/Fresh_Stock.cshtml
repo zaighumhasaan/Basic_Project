@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Basic_Project.Models.Product>
+
+@{
+    ViewData["Title"] = "Fresh_Stock";
+}
+
+<center><h1 class="fa">Fresh Stock</h1></center>
+
+
+<table class="table  table-striped table-hover table-responsive table-hover   table-active table-avatar " id="DataTableData">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductQnty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MfgDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQnty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MfgDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpDate)
+                </td>
+                <td>
+                    <a asp-action="Update_Product" asp-route-id="@item.Id" class="btn btn-success btn-sm">Update</a> |
+                    <a asp-action="Detail_Product" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a> |
+                    <a asp-action="Delete_Product" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@section scripts{
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/DataTable/jquery.dataTables.js"></script>
+    <script src="~/DataTable/jquery.dataTables.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Datatable.js"></script>
+}

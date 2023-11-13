@@ -167,16 +167,13 @@ namespace Basic_Project.Controllers
        public IActionResult Fresh_Stock()
         {
 
-            var fresh_stock = _dbcontext.Products.Where(p => p.MfgDate <= DateTime.Now.AddDays(30)).ToList();
+            var fresh_stock = _dbcontext.Products.Where(p => p.MfgDate <= DateTime.Now.AddDays(10)).ToList();
+
+                return View(fresh_stock);
+            
+            
 
 
-            int count = fresh_stock.Count();
-            if (count == null)
-            {
-                count = 0;
-            }
-
-            return Ok(count);
         }
         public IActionResult Get_Min_Stock()
         {
@@ -193,6 +190,30 @@ namespace Basic_Project.Controllers
             }
 
             return Ok(count);
+
+        }
+
+        [HttpGet]
+        public IActionResult Low_stock()
+        {
+
+
+            //  lCategories = _dbcontext.ItemCategories.Where(o => o.CatLevel !=1).ToList();
+
+            var minstock = _dbcontext.Products.Where(p => p.ProductQnty <= 15).ToList();
+
+            int count = minstock.Count();
+
+            if (count !=0)
+            {
+                return View(minstock);
+            }
+            else
+            {
+                return View(minstock);
+            }
+
+           
 
         }
 
@@ -215,6 +236,25 @@ namespace Basic_Project.Controllers
             }
            
         }
+        [HttpGet]
+
+        public IActionResult About_To_Expire()
+        {
+            var today = DateTime.Now.AddMonths(1);
+            var near_to_exp = _dbcontext.Products.Where(p => p.ExpDate <= today).ToList();
+            int count = near_to_exp.Count();
+            if (count != 0)
+            {
+                return View(near_to_exp);
+            }
+            else
+            {
+
+                return View(near_to_exp);
+            }
+
+
+        }
 
         public IActionResult Expired()
         {
@@ -232,6 +272,25 @@ namespace Basic_Project.Controllers
 
 
             return Ok(count);
+        }
+
+        [HttpGet]
+        public IActionResult Expired_Products()
+        {
+
+            var today = DateTime.Now;
+            var expired_products = _dbcontext.Products.Where(p => p.ExpDate <= today).ToList();
+            int count = expired_products.Count();
+            if (count != 0)
+            {
+                return View(expired_products);
+            }
+            else
+            {
+                
+                return View(expired_products);
+            }
+
         }
 
     }
